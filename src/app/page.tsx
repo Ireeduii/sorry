@@ -7,12 +7,12 @@ import {
   Float,
   Stars,
   MeshDistortMaterial,
+  Center, // Импортыг дээр нь нэгтгэв
 } from "@react-three/drei";
 import * as THREE from "three";
 
 function createHeartShape() {
   const shape = new THREE.Shape();
-
   const x = 0,
     y = 0;
 
@@ -29,7 +29,6 @@ function createHeartShape() {
 
 function FloatingHeart() {
   const mesh = useRef<THREE.Mesh>(null);
-
   const heartShape = useMemo(() => createHeartShape(), []);
 
   const extrudeSettings = useMemo(
@@ -48,7 +47,6 @@ function FloatingHeart() {
     const t = state.clock.getElapsedTime();
     if (mesh.current) {
       mesh.current.rotation.y = t * 0.4;
-
       mesh.current.position.y = Math.sin(t / 1.5) * 0.2;
     }
   });
@@ -57,7 +55,6 @@ function FloatingHeart() {
     <Float speed={3} rotationIntensity={1} floatIntensity={1}>
       <mesh ref={mesh} rotation={[Math.PI, 0, 0]} scale={0.5}>
         <extrudeGeometry args={[heartShape, extrudeSettings]} />
-
         <MeshDistortMaterial
           color="#ff1144"
           speed={2}
@@ -123,5 +120,3 @@ export default function Home() {
     </main>
   );
 }
-
-import { Center } from "@react-three/drei";
